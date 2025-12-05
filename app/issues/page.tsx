@@ -53,13 +53,12 @@ export default function IssuesPage() {
       const userEmail = user ? JSON.parse(user).email : "Anonymous";
 
       // Send to backend which will forward to Discord
-      const response = api.post("/issues", {
+      const response = await api.post("/issues", {
           ...data,
           generatedIssueId,
           userEmail,
           timestamp: new Date().toISOString()
       });
-      console.log(response)
 
       if (!response) {
         throw new Error("Failed to submit issue");
