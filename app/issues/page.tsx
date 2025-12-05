@@ -43,25 +43,22 @@ export default function IssuesPage() {
       setError(null);
       setSuccess(false);
 
-      // Generate issue ID for tracking
-      const generatedIssueId = `RPR-${Date.now().toString().slice(-6)}`;
-      setIssueId(generatedIssueId);
-      setSuccess(true);
-      reset();
-
       const user = localStorage.getItem("user");
       const userEmail = user ? JSON.parse(user).email : "Anonymous";
 
       // Send to backend which will forward to Discord
       const response = await api.post("/issues", {
           ...data,
-          generatedIssueId,
-          userEmail,
-          timestamp: new Date().toISOString()
+          userEmail
       });
+      // Backend returns: { issue, issueId, message }
+      const generatedIssueId = response.data.issueId || response.data.issue?.generatedIssueId; 
+      setIssueId(generatedIssueId);
+      setSuccess(true);
+      reset()
 
       if (!response) {
-        throw new Error("Failed to submit issue");
+        setError(response || "Failed to submit issue...");
       }
 
       // Auto-hide success message after 10 seconds
