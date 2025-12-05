@@ -9,9 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "axios": "^1.13.2",
+    "dompurify": "^3.3.0",
+    "isomorphic-dompurify": "^2.33.0",
+    "lucide-react": "^0.555.0",
     "next": "16.0.6",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-hook-form": "^7.67.0",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
